@@ -1,0 +1,374 @@
+﻿<Page x:Class="UP_Murtazin.Pages.MachinesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Торговые автоматы"
+      Background="{StaticResource BackgroundBrush}"
+      Loaded="Page_Loaded">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок и количество -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="Торговые автоматы" FontSize="24" FontWeight="Bold" 
+                       Foreground="{StaticResource PrimaryTextBrush}"/>
+            <TextBlock x:Name="TotalCountText" Text="Всего найдено 0 шт." 
+                       Style="{StaticResource SubtitleStyle}" Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <!-- Панель инструментов -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Padding="15" Margin="0,0,0,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Показать записей -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Показать" VerticalAlignment="Center" 
+                               Foreground="{StaticResource SecondaryTextBrush}" Margin="0,0,10,0"/>
+                    <ComboBox x:Name="PageSizeCombo" Width="80" Height="32" 
+                              Background="White" BorderBrush="{StaticResource BorderBrush}"
+                              SelectedIndex="2" SelectionChanged="PageSizeCombo_SelectionChanged">
+                        <ComboBoxItem Content="10"/>
+                        <ComboBoxItem Content="25"/>
+                        <ComboBoxItem Content="50"/>
+                        <ComboBoxItem Content="100"/>
+                    </ComboBox>
+                    <TextBlock Text="записей" VerticalAlignment="Center" 
+                               Foreground="{StaticResource SecondaryTextBrush}" Margin="10,0,0,0"/>
+                </StackPanel>
+
+                <!-- Переключатель вида (таблица/плитки) -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="20,0,0,0" VerticalAlignment="Center" Height="25" Width="150">
+                    <ToggleButton x:Name="TableViewToggle" Content="📋 Таблица" 
+                                  IsChecked="True" Style="{StaticResource ViewToggleStyle}"
+                                  Click="TableViewToggle_Click" Margin="0,0,5,0"/>
+                    <ToggleButton x:Name="TileViewToggle" Content="🔲 Плитки" 
+                                  Style="{StaticResource ViewToggleStyle}"
+                                  Click="TileViewToggle_Click"/>
+                </StackPanel>
+
+                
+                <!-- Кнопка Добавить -->
+                <Button Grid.Column="4" Content="➕ Добавить" 
+                        Background="#27AE60" Foreground="White" 
+                        BorderThickness="0" Padding="15,8" Cursor="Hand"
+                        Click="AddMachine_Click" Margin="0,0,10,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <!-- Кнопка Экспорт с выпадающим меню -->
+                <Button Grid.Column="5" Content="📊 Экспорт" 
+        Background="#F39C12" Foreground="White" 
+        BorderThickness="0" Padding="15,8" Cursor="Hand"
+        Click="ExportButton_Click" Margin="0,0,10,0">
+                    <Button.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="📄 Экспорт в CSV" Click="ExportCsv_Click"/>
+                            <MenuItem Header="🌐 Экспорт в HTML" Click="ExportHtml_Click"/>
+                            <MenuItem Header="📑 Экспорт в PDF" Click="ExportPdf_Click"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <!-- Кнопка Фильтр -->
+                <Button Grid.Column="6" Content="🔍 Фильтр" 
+                        Background="#3498DB" Foreground="White" 
+                        BorderThickness="0" Padding="20,8" Cursor="Hand"
+                        Click="FilterButton_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <!-- Кнопка Сбросить позиции плиток -->
+                <Button Grid.Column="7" Content="⟳ Сбросить плитки" 
+        Background="#95A5A6" Foreground="White" 
+        BorderThickness="0" Padding="15,8" Cursor="Hand"
+        Click="ResetTilePositions_Click" Margin="10,0,0,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="4"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- Таблица автоматов -->
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}" Padding="0" Name="TableViewBorder">
+            <DataGrid x:Name="MachinesGrid" 
+              AutoGenerateColumns="False" 
+              CanUserAddRows="False"
+              CanUserSortColumns="True" 
+              RowHeight="50"
+              BorderThickness="0"
+              HeadersVisibility="Column"
+              GridLinesVisibility="Horizontal"
+              Background="White"
+              RowBackground="White"
+              AlternatingRowBackground="#F8F9FA"
+              FontSize="13"
+              IsReadOnly="True"
+              ScrollViewer.CanContentScroll="True"
+              ScrollViewer.HorizontalScrollBarVisibility="Auto"
+              ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="80">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="FontWeight" Value="Medium"/>
+                                <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="10,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Название автомата" Binding="{Binding Name}" Width="180">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="10,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Модель" Binding="{Binding Model}" Width="150">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="10,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Компания" Binding="{Binding CompanyName}" Width="200">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="10,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Модем" Binding="{Binding SerialNumber}" Width="120">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="10,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Адрес / Место" Binding="{Binding Location}" Width="200">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="10,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="В работе с" Binding="{Binding InstallDate}" Width="100">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{StaticResource SecondaryTextBrush}"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Padding" Value="10,0"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTemplateColumn Header="Действия" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="🔒" Style="{StaticResource ActionButtonStyle}" 
+                                                Click="BlockButton_Click" Tag="{Binding Id}"/>
+                                    <Button Content="🔑" Style="{StaticResource ActionButtonStyle}" 
+                                                Click="UnblockButton_Click" Tag="{Binding Id}"/>
+                                    <Button Content="✏️" Style="{StaticResource ActionButtonStyle}" 
+                                                Click="EditButton_Click" Tag="{Binding Id}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Плитки автоматов с возможностью перемещения -->
+        <ScrollViewer x:Name="TileViewBorder" Grid.Row="2" Visibility="Collapsed"
+              HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <Canvas x:Name="TilesCanvas" Background="Transparent" 
+            MinHeight="500" Width="Auto"
+            MouseLeftButtonDown="Canvas_MouseLeftButtonDown"
+            MouseMove="Canvas_MouseMove"
+            MouseLeftButtonUp="Canvas_MouseLeftButtonUp">
+
+                <ItemsControl x:Name="TilesItemsControl" Background="Transparent">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <Canvas Background="Transparent"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource TileStyle}" 
+                            Width="280" Height="200"
+                            MouseLeftButtonDown="Tile_MouseLeftButtonDown"
+                            MouseMove="Tile_MouseMove"
+                            MouseLeftButtonUp="Tile_MouseLeftButtonUp"
+                            Tag="{Binding Id}">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="TileTransform"/>
+                                </Border.RenderTransform>
+                                <Border.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Редактировать" Click="EditTile_Click" Tag="{Binding Id}"/>
+                                        <MenuItem Header="Заблокировать" Click="BlockTile_Click" Tag="{Binding Id}"/>
+                                        <MenuItem Header="Разблокировать" Click="UnblockTile_Click" Tag="{Binding Id}"/>
+                                        <Separator/>
+                                        <MenuItem Header="Удалить" Click="DeleteTile_Click" Tag="{Binding Id}"/>
+                                    </ContextMenu>
+                                </Border.ContextMenu>
+                                <StackPanel Margin="15" MouseRightButtonDown="Tile_MouseDoubleClick">
+                                    <TextBlock Text="🏪" FontSize="40" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="Bold" 
+                                       TextWrapping="Wrap" HorizontalAlignment="Center" Margin="0,10,0,5"
+                                       MaxHeight="40"/>
+                                    <Separator Margin="0,5"/>
+                                    <Grid Margin="0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="ID:" FontSize="11" Foreground="#7F8C8D"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Id}" FontSize="11" Margin="5,0,0,0"/>
+                                    </Grid>
+                                    <Grid Margin="0,3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Модель:" FontSize="11" Foreground="#7F8C8D"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Model}" FontSize="11" Margin="5,0,0,0" 
+                                           TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+                                    <Grid Margin="0,3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Компания:" FontSize="11" Foreground="#7F8C8D"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding CompanyName}" FontSize="11" Margin="5,0,0,0" 
+                                           TextTrimming="CharacterEllipsis"/>
+                                    </Grid>
+                                    <TextBlock Text="{Binding InstallDate}" FontSize="10" Foreground="#95A5A6" 
+                                       HorizontalAlignment="Right" Margin="0,8,0,0"/>
+                                    <Border x:Name="BlockedOverlay" Background="#E74C3C" CornerRadius="5" 
+                                    Visibility="{Binding IsBlocked, Converter={StaticResource BoolToVisibility}}"
+                                    HorizontalAlignment="Right" VerticalAlignment="Top" Padding="8,3" Margin="0,-10,-10,0">
+                                        <TextBlock Text="Заблокирован" FontSize="10" Foreground="White"/>
+                                    </Border>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Canvas>
+        </ScrollViewer>
+
+        <!-- Пагинация -->
+        <Border Grid.Row="3" Style="{StaticResource CardStyle}" Padding="15" Margin="0,20,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="PaginationText" Grid.Column="0" 
+                           Text="Запись с 1 по 9 из 9 записей" 
+                           Foreground="{StaticResource SecondaryTextBrush}"
+                           VerticalAlignment="Center"/>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button Content="◀" Style="{StaticResource PaginationButtonStyle}" 
+                            Click="PrevPage_Click" x:Name="PrevButton" Width="30" Margin="0,0,5,0"/>
+                    <TextBlock x:Name="CurrentPageText" Text="1" VerticalAlignment="Center" 
+                               Foreground="{StaticResource PrimaryTextBrush}" Width="30" TextAlignment="Center"/>
+                    <TextBlock Text="/" VerticalAlignment="Center" Foreground="{StaticResource SecondaryTextBrush}"/>
+                    <TextBlock x:Name="TotalPagesText" Text="1" VerticalAlignment="Center" 
+                               Foreground="{StaticResource PrimaryTextBrush}" Width="30" TextAlignment="Center"/>
+                    <Button Content="▶" Style="{StaticResource PaginationButtonStyle}" 
+                            Click="NextPage_Click" x:Name="NextButton" Width="30" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Окно фильтра -->
+        <Popup x:Name="FilterPopup" PlacementTarget="{Binding ElementName=FilterPopup}" 
+               Placement="Mouse" StaysOpen="False">
+            <Border Background="White" BorderBrush="{StaticResource BorderBrush}" 
+                    BorderThickness="1" CornerRadius="8" Padding="20" Width="320">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="1" Opacity="0.1"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="Фильтр" FontSize="18" FontWeight="SemiBold" 
+                               Foreground="{StaticResource PrimaryTextBrush}" Margin="0,0,0,15"/>
+
+                    <TextBlock Text="Название автомата" Foreground="{StaticResource SecondaryTextBrush}" Margin="0,10,0,5"/>
+                    <TextBox x:Name="FilterName" Height="32" BorderBrush="{StaticResource BorderBrush}" 
+                             BorderThickness="1" Padding="8,5" FontSize="13"/>
+
+                    <TextBlock Text="Модель" Foreground="{StaticResource SecondaryTextBrush}" Margin="0,10,0,5"/>
+                    <TextBox x:Name="FilterModel" Height="32" BorderBrush="{StaticResource BorderBrush}" 
+                             BorderThickness="1" Padding="8,5" FontSize="13"/>
+
+                    <TextBlock Text="Компания" Foreground="{StaticResource SecondaryTextBrush}" Margin="0,10,0,5"/>
+                    <TextBox x:Name="FilterCompany" Height="32" BorderBrush="{StaticResource BorderBrush}" 
+                             BorderThickness="1" Padding="8,5" FontSize="13"/>
+
+                    <TextBlock Text="Адрес / Место" Foreground="{StaticResource SecondaryTextBrush}" Margin="0,10,0,5"/>
+                    <TextBox x:Name="FilterAddress" Height="32" BorderBrush="{StaticResource BorderBrush}" 
+                             BorderThickness="1" Padding="8,5" FontSize="13"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                        <Button Content="Сбросить" Style="{StaticResource SecondaryButtonStyle}" 
+                                Padding="15,8" Click="ResetFilter_Click" Margin="0,0,10,0"/>
+                        <Button Content="Применить" Style="{StaticResource PrimaryButtonStyle}" 
+                                Padding="15,8" Click="ApplyFilter_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Popup>
+    </Grid>
+</Page>

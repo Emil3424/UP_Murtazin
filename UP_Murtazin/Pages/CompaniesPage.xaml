@@ -1,0 +1,44 @@
+﻿<Page x:Class="UP_Murtazin.Pages.CompaniesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Компании"
+      Background="{StaticResource BackgroundBrush}">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Text="Компании" FontSize="24" FontWeight="Bold" 
+                   Foreground="{StaticResource PrimaryTextBrush}" Margin="0,0,0,20"/>
+
+        <!-- Таблица компаний -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Padding="0">
+            <DataGrid x:Name="CompaniesGrid" 
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      RowHeight="45"
+                      BorderThickness="0"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      Background="White"
+                      RowBackground="White"
+                      AlternatingRowBackground="#F8F9FA"
+                      FontSize="13">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название компании" Binding="{Binding CompanyName}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Padding" Value="10,0"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</Page>

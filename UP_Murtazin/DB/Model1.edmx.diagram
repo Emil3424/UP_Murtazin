@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f5fc0d2a84fd41cb86f41036becd3ba7" Name="Diagram1">
+        <EntityTypeShape EntityType="UP_MurtazinModel.companies" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.critical_threshold_templates" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.kit_online_id" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.maintenance" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.notification_templates" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.operators" Width="1.5" PointX="0.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.payment_methods" Width="1.5" PointX="5.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.payment_types" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.product" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.rfid_cash_collections" Width="1.5" PointX="8.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.rfid_loading" Width="1.5" PointX="5.25" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.rfid_services" Width="1.5" PointX="5.25" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.roles" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.sales" Width="1.5" PointX="7.5" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.service_priorities" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.statuss" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.users" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.vending_machines" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.work_descriptions" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UP_MurtazinModel.work_modes" Width="1.5" PointX="6" PointY="24.25" IsExpanded="true" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_kit_online_id_companies" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_kit_online_id_critical_threshold_templates" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_kit_online_id_notification_templates" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_kit_online_id_payment_types" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_kit_online_id_service_priorities" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_kit_online_id_statuss" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_kit_online_id_users1" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_kit_online_id_users2" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_kit_online_id_vending_machines" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_maintenance_users" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_maintenance_vending_machines" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_maintenance_work_descriptions" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_vending_machines_operators" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_sales_payment_methods" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_product_vending_machines" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_sales_product" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_rfid_cash_collections_vending_machines" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_rfid_cash_collections_work_modes" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_rfid_loading_vending_machines" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_rfid_services_vending_machines" ManuallyRouted="false" />
+        <AssociationConnector Association="UP_MurtazinModel.FK_users_roles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

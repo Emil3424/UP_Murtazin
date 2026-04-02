@@ -1,0 +1,1389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище UP_MurtazinModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="companies">
+          <Key>
+            <PropertyRef Name="company" />
+          </Key>
+          <Property Name="company" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="critical_threshold_templates">
+          <Key>
+            <PropertyRef Name="critical_threshold_template" />
+          </Key>
+          <Property Name="critical_threshold_template" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kit_online_id">
+          <Key>
+            <PropertyRef Name="kit_online_id" />
+          </Key>
+          <Property Name="vending_machine_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="kit_online_id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="company" Type="nvarchar" MaxLength="255" />
+          <Property Name="payment_type" Type="nvarchar" MaxLength="255" />
+          <Property Name="critical_threshold_template" Type="nvarchar" MaxLength="255" />
+          <Property Name="service_priority" Type="nvarchar" MaxLength="255" />
+          <Property Name="manager" Type="nvarchar" MaxLength="255" />
+          <Property Name="status" Type="nvarchar" MaxLength="255" />
+          <Property Name="notification_template" Type="nvarchar" MaxLength="255" />
+          <Property Name="working_hours" Type="nvarchar" MaxLength="255" />
+          <Property Name="engineer" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="maintenance">
+          <Key>
+            <PropertyRef Name="maintenance_id" />
+          </Key>
+          <Property Name="maintenance_id" Type="float" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="issues_found" Type="nvarchar" MaxLength="255" />
+          <Property Name="vending_machine_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="user_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="work_description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="notification_templates">
+          <Key>
+            <PropertyRef Name="notification_template" />
+          </Key>
+          <Property Name="notification_template" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="operators">
+          <Key>
+            <PropertyRef Name="operator" />
+          </Key>
+          <Property Name="operator" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payment_methods">
+          <Key>
+            <PropertyRef Name="payment_method" />
+          </Key>
+          <Property Name="payment_method" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payment_types">
+          <Key>
+            <PropertyRef Name="payment_type" />
+          </Key>
+          <Property Name="payment_type" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="price" Type="float" />
+          <Property Name="min_stock" Type="float" />
+          <Property Name="vending_machine_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="quantity_available" Type="float" />
+          <Property Name="sales_trend" Type="float" />
+        </EntityType>
+        <EntityType Name="rfid_cash_collections">
+          <Key>
+            <PropertyRef Name="rfid_cash_collection" />
+          </Key>
+          <Property Name="vending_machine_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="rfid_cash_collection" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="location" Type="nvarchar" MaxLength="255" />
+          <Property Name="work_mode" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="rfid_loading">
+          <Key>
+            <PropertyRef Name="rfid_loading" />
+          </Key>
+          <Property Name="vending_machine_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="rfid_loading" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="model" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="rfid_services">
+          <Key>
+            <PropertyRef Name="rfid_service" />
+          </Key>
+          <Property Name="vending_machine_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="rfid_service" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="coordinates" Type="nvarchar" MaxLength="255" />
+          <Property Name="total_income" Type="nvarchar" MaxLength="255" />
+          <Property Name="timezone" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="role" />
+          </Key>
+          <Property Name="role" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sales">
+          <Key>
+            <PropertyRef Name="sales_id" />
+          </Key>
+          <Property Name="sales_id" Type="float" Nullable="false" />
+          <Property Name="timestamp" Type="nvarchar" MaxLength="255" />
+          <Property Name="product_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="total_price" Type="nvarchar" MaxLength="255" />
+          <Property Name="quantity" Type="float" />
+          <Property Name="payment_method" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="service_priorities">
+          <Key>
+            <PropertyRef Name="service_priority" />
+          </Key>
+          <Property Name="service_priority" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="statuss">
+          <Key>
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="status" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="255" />
+          <Property Name="full_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="is_manager" Type="nvarchar" MaxLength="255" />
+          <Property Name="is_engineer" Type="nvarchar" MaxLength="255" />
+          <Property Name="phone" Type="nvarchar" MaxLength="255" />
+          <Property Name="is_operator" Type="nvarchar" MaxLength="255" />
+          <Property Name="role" Type="nvarchar" MaxLength="255" />
+          <Property Name="image" Type="nvarchar(max)" />
+          <Property Name="passsword" Type="nvarchar" MaxLength="255" />
+          <Property Name="salt" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="vending_machines">
+          <Key>
+            <PropertyRef Name="vending_machine_id" />
+          </Key>
+          <Property Name="vending_machine_id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="serial_number" Type="float" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="user_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="rfid_cash_collection" Type="nvarchar" MaxLength="255" />
+          <Property Name="rfid_loading" Type="nvarchar" MaxLength="255" />
+          <Property Name="kit_online_id" Type="nvarchar" MaxLength="255" />
+          <Property Name="rfid_service" Type="nvarchar" MaxLength="255" />
+          <Property Name="install_date" Type="nvarchar" MaxLength="255" />
+          <Property Name="place" Type="nvarchar" MaxLength="255" />
+          <Property Name="operator" Type="nvarchar" MaxLength="255" />
+          <Property Name="technician" Type="nvarchar" MaxLength="255" />
+          <Property Name="last_maintenance_date" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="work_descriptions">
+          <Key>
+            <PropertyRef Name="work_description" />
+          </Key>
+          <Property Name="work_description" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="work_modes">
+          <Key>
+            <PropertyRef Name="work_mode" />
+          </Key>
+          <Property Name="work_mode" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_kit_online_id_companies">
+          <End Role="companies" Type="Self.companies" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="companies">
+              <PropertyRef Name="company" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="company" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_critical_threshold_templates">
+          <End Role="critical_threshold_templates" Type="Self.critical_threshold_templates" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="critical_threshold_templates">
+              <PropertyRef Name="critical_threshold_template" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="critical_threshold_template" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_notification_templates">
+          <End Role="notification_templates" Type="Self.notification_templates" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="notification_templates">
+              <PropertyRef Name="notification_template" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="notification_template" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_payment_types">
+          <End Role="payment_types" Type="Self.payment_types" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="payment_types">
+              <PropertyRef Name="payment_type" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="payment_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_service_priorities">
+          <End Role="service_priorities" Type="Self.service_priorities" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service_priorities">
+              <PropertyRef Name="service_priority" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="service_priority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_statuss">
+          <End Role="statuss" Type="Self.statuss" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statuss">
+              <PropertyRef Name="status" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_users1">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="engineer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_users2">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="manager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_maintenance_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="maintenance" Type="Self.maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="maintenance">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_maintenance_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="maintenance" Type="Self.maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="maintenance">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_maintenance_work_descriptions">
+          <End Role="work_descriptions" Type="Self.work_descriptions" Multiplicity="0..1" />
+          <End Role="maintenance" Type="Self.maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="work_descriptions">
+              <PropertyRef Name="work_description" />
+            </Principal>
+            <Dependent Role="maintenance">
+              <PropertyRef Name="work_description" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rfid_cash_collections_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="rfid_cash_collections" Type="Self.rfid_cash_collections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="rfid_cash_collections">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rfid_cash_collections_work_modes">
+          <End Role="work_modes" Type="Self.work_modes" Multiplicity="0..1" />
+          <End Role="rfid_cash_collections" Type="Self.rfid_cash_collections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="work_modes">
+              <PropertyRef Name="work_mode" />
+            </Principal>
+            <Dependent Role="rfid_cash_collections">
+              <PropertyRef Name="work_mode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rfid_loading_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="rfid_loading" Type="Self.rfid_loading" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="rfid_loading">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rfid_services_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="rfid_services" Type="Self.rfid_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="rfid_services">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_payment_methods">
+          <End Role="payment_methods" Type="Self.payment_methods" Multiplicity="0..1" />
+          <End Role="sales" Type="Self.sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="payment_methods">
+              <PropertyRef Name="payment_method" />
+            </Principal>
+            <Dependent Role="sales">
+              <PropertyRef Name="payment_method" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="sales" Type="Self.sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="sales">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vending_machines_operators">
+          <End Role="operators" Type="Self.operators" Multiplicity="0..1" />
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operators">
+              <PropertyRef Name="operator" />
+            </Principal>
+            <Dependent Role="vending_machines">
+              <PropertyRef Name="operator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище UP_MurtazinModelContainer">
+          <EntitySet Name="companies" EntityType="Self.companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="critical_threshold_templates" EntityType="Self.critical_threshold_templates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kit_online_id" EntityType="Self.kit_online_id" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="maintenance" EntityType="Self.maintenance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="notification_templates" EntityType="Self.notification_templates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="operators" EntityType="Self.operators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment_methods" EntityType="Self.payment_methods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment_types" EntityType="Self.payment_types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rfid_cash_collections" EntityType="Self.rfid_cash_collections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rfid_loading" EntityType="Self.rfid_loading" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rfid_services" EntityType="Self.rfid_services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sales" EntityType="Self.sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="service_priorities" EntityType="Self.service_priorities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="statuss" EntityType="Self.statuss" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vending_machines" EntityType="Self.vending_machines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="work_descriptions" EntityType="Self.work_descriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="work_modes" EntityType="Self.work_modes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_kit_online_id_companies" Association="Self.FK_kit_online_id_companies">
+            <End Role="companies" EntitySet="companies" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_critical_threshold_templates" Association="Self.FK_kit_online_id_critical_threshold_templates">
+            <End Role="critical_threshold_templates" EntitySet="critical_threshold_templates" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_notification_templates" Association="Self.FK_kit_online_id_notification_templates">
+            <End Role="notification_templates" EntitySet="notification_templates" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_payment_types" Association="Self.FK_kit_online_id_payment_types">
+            <End Role="payment_types" EntitySet="payment_types" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_service_priorities" Association="Self.FK_kit_online_id_service_priorities">
+            <End Role="service_priorities" EntitySet="service_priorities" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_statuss" Association="Self.FK_kit_online_id_statuss">
+            <End Role="statuss" EntitySet="statuss" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_users1" Association="Self.FK_kit_online_id_users1">
+            <End Role="users" EntitySet="users" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_users2" Association="Self.FK_kit_online_id_users2">
+            <End Role="users" EntitySet="users" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_vending_machines" Association="Self.FK_kit_online_id_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_maintenance_users" Association="Self.FK_maintenance_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="maintenance" EntitySet="maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_maintenance_vending_machines" Association="Self.FK_maintenance_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="maintenance" EntitySet="maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_maintenance_work_descriptions" Association="Self.FK_maintenance_work_descriptions">
+            <End Role="work_descriptions" EntitySet="work_descriptions" />
+            <End Role="maintenance" EntitySet="maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_vending_machines" Association="Self.FK_product_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rfid_cash_collections_vending_machines" Association="Self.FK_rfid_cash_collections_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="rfid_cash_collections" EntitySet="rfid_cash_collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rfid_cash_collections_work_modes" Association="Self.FK_rfid_cash_collections_work_modes">
+            <End Role="work_modes" EntitySet="work_modes" />
+            <End Role="rfid_cash_collections" EntitySet="rfid_cash_collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rfid_loading_vending_machines" Association="Self.FK_rfid_loading_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="rfid_loading" EntitySet="rfid_loading" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rfid_services_vending_machines" Association="Self.FK_rfid_services_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="rfid_services" EntitySet="rfid_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_payment_methods" Association="Self.FK_sales_payment_methods">
+            <End Role="payment_methods" EntitySet="payment_methods" />
+            <End Role="sales" EntitySet="sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_product" Association="Self.FK_sales_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="sales" EntitySet="sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_roles" Association="Self.FK_users_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vending_machines_operators" Association="Self.FK_vending_machines_operators">
+            <End Role="operators" EntitySet="operators" />
+            <End Role="vending_machines" EntitySet="vending_machines" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UP_MurtazinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="companies">
+          <Key>
+            <PropertyRef Name="company" />
+          </Key>
+          <Property Name="company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="kit_online_id" Relationship="Self.FK_kit_online_id_companies" FromRole="companies" ToRole="kit_online_id" />
+        </EntityType>
+        <EntityType Name="critical_threshold_templates">
+          <Key>
+            <PropertyRef Name="critical_threshold_template" />
+          </Key>
+          <Property Name="critical_threshold_template" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="kit_online_id" Relationship="Self.FK_kit_online_id_critical_threshold_templates" FromRole="critical_threshold_templates" ToRole="kit_online_id" />
+        </EntityType>
+        <EntityType Name="kit_online_id">
+          <Key>
+            <PropertyRef Name="kit_online_id1" />
+          </Key>
+          <Property Name="vending_machine_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="kit_online_id1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="company" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="payment_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="critical_threshold_template" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="service_priority" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="manager" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="notification_template" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="working_hours" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="engineer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="companies" Relationship="Self.FK_kit_online_id_companies" FromRole="kit_online_id" ToRole="companies" />
+          <NavigationProperty Name="critical_threshold_templates" Relationship="Self.FK_kit_online_id_critical_threshold_templates" FromRole="kit_online_id" ToRole="critical_threshold_templates" />
+          <NavigationProperty Name="notification_templates" Relationship="Self.FK_kit_online_id_notification_templates" FromRole="kit_online_id" ToRole="notification_templates" />
+          <NavigationProperty Name="payment_types" Relationship="Self.FK_kit_online_id_payment_types" FromRole="kit_online_id" ToRole="payment_types" />
+          <NavigationProperty Name="service_priorities" Relationship="Self.FK_kit_online_id_service_priorities" FromRole="kit_online_id" ToRole="service_priorities" />
+          <NavigationProperty Name="statuss" Relationship="Self.FK_kit_online_id_statuss" FromRole="kit_online_id" ToRole="statuss" />
+          <NavigationProperty Name="users" Relationship="Self.FK_kit_online_id_users1" FromRole="kit_online_id" ToRole="users" />
+          <NavigationProperty Name="users1" Relationship="Self.FK_kit_online_id_users2" FromRole="kit_online_id" ToRole="users" />
+          <NavigationProperty Name="vending_machines" Relationship="Self.FK_kit_online_id_vending_machines" FromRole="kit_online_id" ToRole="vending_machines" />
+        </EntityType>
+        <EntityType Name="maintenance">
+          <Key>
+            <PropertyRef Name="maintenance_id" />
+          </Key>
+          <Property Name="maintenance_id" Type="Double" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="issues_found" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="vending_machine_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="work_description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="users" Relationship="Self.FK_maintenance_users" FromRole="maintenance" ToRole="users" />
+          <NavigationProperty Name="vending_machines" Relationship="Self.FK_maintenance_vending_machines" FromRole="maintenance" ToRole="vending_machines" />
+          <NavigationProperty Name="work_descriptions" Relationship="Self.FK_maintenance_work_descriptions" FromRole="maintenance" ToRole="work_descriptions" />
+        </EntityType>
+        <EntityType Name="notification_templates">
+          <Key>
+            <PropertyRef Name="notification_template" />
+          </Key>
+          <Property Name="notification_template" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="kit_online_id" Relationship="Self.FK_kit_online_id_notification_templates" FromRole="notification_templates" ToRole="kit_online_id" />
+        </EntityType>
+        <EntityType Name="operators">
+          <Key>
+            <PropertyRef Name="operator" />
+          </Key>
+          <Property Name="operator" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="vending_machines" Relationship="Self.FK_vending_machines_operators" FromRole="operators" ToRole="vending_machines" />
+        </EntityType>
+        <EntityType Name="payment_methods">
+          <Key>
+            <PropertyRef Name="payment_method" />
+          </Key>
+          <Property Name="payment_method" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="sales" Relationship="Self.FK_sales_payment_methods" FromRole="payment_methods" ToRole="sales" />
+        </EntityType>
+        <EntityType Name="payment_types">
+          <Key>
+            <PropertyRef Name="payment_type" />
+          </Key>
+          <Property Name="payment_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="kit_online_id" Relationship="Self.FK_kit_online_id_payment_types" FromRole="payment_types" ToRole="kit_online_id" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Double" />
+          <Property Name="min_stock" Type="Double" />
+          <Property Name="vending_machine_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="quantity_available" Type="Double" />
+          <Property Name="sales_trend" Type="Double" />
+          <NavigationProperty Name="vending_machines" Relationship="Self.FK_product_vending_machines" FromRole="product" ToRole="vending_machines" />
+          <NavigationProperty Name="sales" Relationship="Self.FK_sales_product" FromRole="product" ToRole="sales" />
+        </EntityType>
+        <EntityType Name="rfid_cash_collections">
+          <Key>
+            <PropertyRef Name="rfid_cash_collection" />
+          </Key>
+          <Property Name="vending_machine_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rfid_cash_collection" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="work_mode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vending_machines" Relationship="Self.FK_rfid_cash_collections_vending_machines" FromRole="rfid_cash_collections" ToRole="vending_machines" />
+          <NavigationProperty Name="work_modes" Relationship="Self.FK_rfid_cash_collections_work_modes" FromRole="rfid_cash_collections" ToRole="work_modes" />
+        </EntityType>
+        <EntityType Name="rfid_loading">
+          <Key>
+            <PropertyRef Name="rfid_loading1" />
+          </Key>
+          <Property Name="vending_machine_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rfid_loading1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="model" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vending_machines" Relationship="Self.FK_rfid_loading_vending_machines" FromRole="rfid_loading" ToRole="vending_machines" />
+        </EntityType>
+        <EntityType Name="rfid_services">
+          <Key>
+            <PropertyRef Name="rfid_service" />
+          </Key>
+          <Property Name="vending_machine_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rfid_service" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="coordinates" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="total_income" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="timezone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vending_machines" Relationship="Self.FK_rfid_services_vending_machines" FromRole="rfid_services" ToRole="vending_machines" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="role" />
+          </Key>
+          <Property Name="role" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK_users_roles" FromRole="roles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="sales">
+          <Key>
+            <PropertyRef Name="sales_id" />
+          </Key>
+          <Property Name="sales_id" Type="Double" Nullable="false" />
+          <Property Name="timestamp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="product_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="total_price" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Double" />
+          <Property Name="payment_method" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="payment_methods" Relationship="Self.FK_sales_payment_methods" FromRole="sales" ToRole="payment_methods" />
+          <NavigationProperty Name="product" Relationship="Self.FK_sales_product" FromRole="sales" ToRole="product" />
+        </EntityType>
+        <EntityType Name="service_priorities">
+          <Key>
+            <PropertyRef Name="service_priority" />
+          </Key>
+          <Property Name="service_priority" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="kit_online_id" Relationship="Self.FK_kit_online_id_service_priorities" FromRole="service_priorities" ToRole="kit_online_id" />
+        </EntityType>
+        <EntityType Name="statuss">
+          <Key>
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="kit_online_id" Relationship="Self.FK_kit_online_id_statuss" FromRole="statuss" ToRole="kit_online_id" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="full_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="is_manager" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="is_engineer" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="is_operator" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="kit_online_id" Relationship="Self.FK_kit_online_id_users1" FromRole="users" ToRole="kit_online_id" />
+          <NavigationProperty Name="kit_online_id1" Relationship="Self.FK_kit_online_id_users2" FromRole="users" ToRole="kit_online_id" />
+          <NavigationProperty Name="maintenance" Relationship="Self.FK_maintenance_users" FromRole="users" ToRole="maintenance" />
+          <NavigationProperty Name="roles" Relationship="Self.FK_users_roles" FromRole="users" ToRole="roles" />
+          <Property Name="passsword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="salt" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vending_machines">
+          <Key>
+            <PropertyRef Name="vending_machine_id" />
+          </Key>
+          <Property Name="vending_machine_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="serial_number" Type="Double" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rfid_cash_collection" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rfid_loading" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="kit_online_id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rfid_service" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="install_date" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="place" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="operator" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="technician" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="last_maintenance_date" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="kit_online_id1" Relationship="Self.FK_kit_online_id_vending_machines" FromRole="vending_machines" ToRole="kit_online_id" />
+          <NavigationProperty Name="maintenance" Relationship="Self.FK_maintenance_vending_machines" FromRole="vending_machines" ToRole="maintenance" />
+          <NavigationProperty Name="operators" Relationship="Self.FK_vending_machines_operators" FromRole="vending_machines" ToRole="operators" />
+          <NavigationProperty Name="product" Relationship="Self.FK_product_vending_machines" FromRole="vending_machines" ToRole="product" />
+          <NavigationProperty Name="rfid_cash_collections" Relationship="Self.FK_rfid_cash_collections_vending_machines" FromRole="vending_machines" ToRole="rfid_cash_collections" />
+          <NavigationProperty Name="rfid_loading1" Relationship="Self.FK_rfid_loading_vending_machines" FromRole="vending_machines" ToRole="rfid_loading" />
+          <NavigationProperty Name="rfid_services" Relationship="Self.FK_rfid_services_vending_machines" FromRole="vending_machines" ToRole="rfid_services" />
+        </EntityType>
+        <EntityType Name="work_descriptions">
+          <Key>
+            <PropertyRef Name="work_description" />
+          </Key>
+          <Property Name="work_description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="maintenance" Relationship="Self.FK_maintenance_work_descriptions" FromRole="work_descriptions" ToRole="maintenance" />
+        </EntityType>
+        <EntityType Name="work_modes">
+          <Key>
+            <PropertyRef Name="work_mode" />
+          </Key>
+          <Property Name="work_mode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="rfid_cash_collections" Relationship="Self.FK_rfid_cash_collections_work_modes" FromRole="work_modes" ToRole="rfid_cash_collections" />
+        </EntityType>
+        <Association Name="FK_kit_online_id_companies">
+          <End Role="companies" Type="Self.companies" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="companies">
+              <PropertyRef Name="company" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="company" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_critical_threshold_templates">
+          <End Role="critical_threshold_templates" Type="Self.critical_threshold_templates" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="critical_threshold_templates">
+              <PropertyRef Name="critical_threshold_template" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="critical_threshold_template" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_notification_templates">
+          <End Role="notification_templates" Type="Self.notification_templates" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="notification_templates">
+              <PropertyRef Name="notification_template" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="notification_template" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_payment_types">
+          <End Role="payment_types" Type="Self.payment_types" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="payment_types">
+              <PropertyRef Name="payment_type" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="payment_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_service_priorities">
+          <End Role="service_priorities" Type="Self.service_priorities" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service_priorities">
+              <PropertyRef Name="service_priority" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="service_priority" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_statuss">
+          <End Role="statuss" Type="Self.statuss" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statuss">
+              <PropertyRef Name="status" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_users1">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="engineer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_users2">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="manager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kit_online_id_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="kit_online_id" Type="Self.kit_online_id" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="kit_online_id">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_maintenance_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="maintenance" Type="Self.maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="maintenance">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_maintenance_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="maintenance" Type="Self.maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="maintenance">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_maintenance_work_descriptions">
+          <End Role="work_descriptions" Type="Self.work_descriptions" Multiplicity="0..1" />
+          <End Role="maintenance" Type="Self.maintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="work_descriptions">
+              <PropertyRef Name="work_description" />
+            </Principal>
+            <Dependent Role="maintenance">
+              <PropertyRef Name="work_description" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vending_machines_operators">
+          <End Role="operators" Type="Self.operators" Multiplicity="0..1" />
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="operators">
+              <PropertyRef Name="operator" />
+            </Principal>
+            <Dependent Role="vending_machines">
+              <PropertyRef Name="operator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_payment_methods">
+          <End Role="payment_methods" Type="Self.payment_methods" Multiplicity="0..1" />
+          <End Role="sales" Type="Self.sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="payment_methods">
+              <PropertyRef Name="payment_method" />
+            </Principal>
+            <Dependent Role="sales">
+              <PropertyRef Name="payment_method" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_product_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sales_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="sales" Type="Self.sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="sales">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rfid_cash_collections_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="rfid_cash_collections" Type="Self.rfid_cash_collections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="rfid_cash_collections">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rfid_cash_collections_work_modes">
+          <End Role="work_modes" Type="Self.work_modes" Multiplicity="0..1" />
+          <End Role="rfid_cash_collections" Type="Self.rfid_cash_collections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="work_modes">
+              <PropertyRef Name="work_mode" />
+            </Principal>
+            <Dependent Role="rfid_cash_collections">
+              <PropertyRef Name="work_mode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rfid_loading_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="rfid_loading" Type="Self.rfid_loading" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="rfid_loading">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rfid_services_vending_machines">
+          <End Role="vending_machines" Type="Self.vending_machines" Multiplicity="0..1" />
+          <End Role="rfid_services" Type="Self.rfid_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vending_machines">
+              <PropertyRef Name="vending_machine_id" />
+            </Principal>
+            <Dependent Role="rfid_services">
+              <PropertyRef Name="vending_machine_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="role" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UP_MurtazinEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="companies" EntityType="Self.companies" />
+          <EntitySet Name="critical_threshold_templates" EntityType="Self.critical_threshold_templates" />
+          <EntitySet Name="kit_online_id" EntityType="Self.kit_online_id" />
+          <EntitySet Name="maintenance" EntityType="Self.maintenance" />
+          <EntitySet Name="notification_templates" EntityType="Self.notification_templates" />
+          <EntitySet Name="operators" EntityType="Self.operators" />
+          <EntitySet Name="payment_methods" EntityType="Self.payment_methods" />
+          <EntitySet Name="payment_types" EntityType="Self.payment_types" />
+          <EntitySet Name="product" EntityType="Self.product" />
+          <EntitySet Name="rfid_cash_collections" EntityType="Self.rfid_cash_collections" />
+          <EntitySet Name="rfid_loading" EntityType="Self.rfid_loading" />
+          <EntitySet Name="rfid_services" EntityType="Self.rfid_services" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="sales" EntityType="Self.sales" />
+          <EntitySet Name="service_priorities" EntityType="Self.service_priorities" />
+          <EntitySet Name="statuss" EntityType="Self.statuss" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="vending_machines" EntityType="Self.vending_machines" />
+          <EntitySet Name="work_descriptions" EntityType="Self.work_descriptions" />
+          <EntitySet Name="work_modes" EntityType="Self.work_modes" />
+          <AssociationSet Name="FK_kit_online_id_companies" Association="Self.FK_kit_online_id_companies">
+            <End Role="companies" EntitySet="companies" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_critical_threshold_templates" Association="Self.FK_kit_online_id_critical_threshold_templates">
+            <End Role="critical_threshold_templates" EntitySet="critical_threshold_templates" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_notification_templates" Association="Self.FK_kit_online_id_notification_templates">
+            <End Role="notification_templates" EntitySet="notification_templates" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_payment_types" Association="Self.FK_kit_online_id_payment_types">
+            <End Role="payment_types" EntitySet="payment_types" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_service_priorities" Association="Self.FK_kit_online_id_service_priorities">
+            <End Role="service_priorities" EntitySet="service_priorities" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_statuss" Association="Self.FK_kit_online_id_statuss">
+            <End Role="statuss" EntitySet="statuss" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_users1" Association="Self.FK_kit_online_id_users1">
+            <End Role="users" EntitySet="users" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_users2" Association="Self.FK_kit_online_id_users2">
+            <End Role="users" EntitySet="users" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kit_online_id_vending_machines" Association="Self.FK_kit_online_id_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="kit_online_id" EntitySet="kit_online_id" />
+          </AssociationSet>
+          <AssociationSet Name="FK_maintenance_users" Association="Self.FK_maintenance_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="maintenance" EntitySet="maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_maintenance_vending_machines" Association="Self.FK_maintenance_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="maintenance" EntitySet="maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_maintenance_work_descriptions" Association="Self.FK_maintenance_work_descriptions">
+            <End Role="work_descriptions" EntitySet="work_descriptions" />
+            <End Role="maintenance" EntitySet="maintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vending_machines_operators" Association="Self.FK_vending_machines_operators">
+            <End Role="operators" EntitySet="operators" />
+            <End Role="vending_machines" EntitySet="vending_machines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_payment_methods" Association="Self.FK_sales_payment_methods">
+            <End Role="payment_methods" EntitySet="payment_methods" />
+            <End Role="sales" EntitySet="sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_product_vending_machines" Association="Self.FK_product_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sales_product" Association="Self.FK_sales_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="sales" EntitySet="sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rfid_cash_collections_vending_machines" Association="Self.FK_rfid_cash_collections_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="rfid_cash_collections" EntitySet="rfid_cash_collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rfid_cash_collections_work_modes" Association="Self.FK_rfid_cash_collections_work_modes">
+            <End Role="work_modes" EntitySet="work_modes" />
+            <End Role="rfid_cash_collections" EntitySet="rfid_cash_collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rfid_loading_vending_machines" Association="Self.FK_rfid_loading_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="rfid_loading" EntitySet="rfid_loading" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rfid_services_vending_machines" Association="Self.FK_rfid_services_vending_machines">
+            <End Role="vending_machines" EntitySet="vending_machines" />
+            <End Role="rfid_services" EntitySet="rfid_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_roles" Association="Self.FK_users_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище UP_MurtazinModelContainer" CdmEntityContainer="UP_MurtazinEntities">
+          <EntitySetMapping Name="companies">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.companies">
+              <MappingFragment StoreEntitySet="companies">
+                <ScalarProperty Name="company" ColumnName="company" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="critical_threshold_templates">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.critical_threshold_templates">
+              <MappingFragment StoreEntitySet="critical_threshold_templates">
+                <ScalarProperty Name="critical_threshold_template" ColumnName="critical_threshold_template" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kit_online_id">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.kit_online_id">
+              <MappingFragment StoreEntitySet="kit_online_id">
+                <ScalarProperty Name="vending_machine_id" ColumnName="vending_machine_id" />
+                <ScalarProperty Name="kit_online_id1" ColumnName="kit_online_id" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+                <ScalarProperty Name="critical_threshold_template" ColumnName="critical_threshold_template" />
+                <ScalarProperty Name="service_priority" ColumnName="service_priority" />
+                <ScalarProperty Name="manager" ColumnName="manager" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="notification_template" ColumnName="notification_template" />
+                <ScalarProperty Name="working_hours" ColumnName="working_hours" />
+                <ScalarProperty Name="engineer" ColumnName="engineer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="maintenance">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.maintenance">
+              <MappingFragment StoreEntitySet="maintenance">
+                <ScalarProperty Name="maintenance_id" ColumnName="maintenance_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="issues_found" ColumnName="issues_found" />
+                <ScalarProperty Name="vending_machine_id" ColumnName="vending_machine_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="work_description" ColumnName="work_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notification_templates">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.notification_templates">
+              <MappingFragment StoreEntitySet="notification_templates">
+                <ScalarProperty Name="notification_template" ColumnName="notification_template" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="operators">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.operators">
+              <MappingFragment StoreEntitySet="operators">
+                <ScalarProperty Name="operator" ColumnName="operator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payment_methods">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.payment_methods">
+              <MappingFragment StoreEntitySet="payment_methods">
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payment_types">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.payment_types">
+              <MappingFragment StoreEntitySet="payment_types">
+                <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="min_stock" ColumnName="min_stock" />
+                <ScalarProperty Name="vending_machine_id" ColumnName="vending_machine_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="quantity_available" ColumnName="quantity_available" />
+                <ScalarProperty Name="sales_trend" ColumnName="sales_trend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rfid_cash_collections">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.rfid_cash_collections">
+              <MappingFragment StoreEntitySet="rfid_cash_collections">
+                <ScalarProperty Name="vending_machine_id" ColumnName="vending_machine_id" />
+                <ScalarProperty Name="rfid_cash_collection" ColumnName="rfid_cash_collection" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="work_mode" ColumnName="work_mode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rfid_loading">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.rfid_loading">
+              <MappingFragment StoreEntitySet="rfid_loading">
+                <ScalarProperty Name="vending_machine_id" ColumnName="vending_machine_id" />
+                <ScalarProperty Name="rfid_loading1" ColumnName="rfid_loading" />
+                <ScalarProperty Name="model" ColumnName="model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rfid_services">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.rfid_services">
+              <MappingFragment StoreEntitySet="rfid_services">
+                <ScalarProperty Name="vending_machine_id" ColumnName="vending_machine_id" />
+                <ScalarProperty Name="rfid_service" ColumnName="rfid_service" />
+                <ScalarProperty Name="coordinates" ColumnName="coordinates" />
+                <ScalarProperty Name="total_income" ColumnName="total_income" />
+                <ScalarProperty Name="timezone" ColumnName="timezone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sales">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.sales">
+              <MappingFragment StoreEntitySet="sales">
+                <ScalarProperty Name="sales_id" ColumnName="sales_id" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="service_priorities">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.service_priorities">
+              <MappingFragment StoreEntitySet="service_priorities">
+                <ScalarProperty Name="service_priority" ColumnName="service_priority" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statuss">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.statuss">
+              <MappingFragment StoreEntitySet="statuss">
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="salt" ColumnName="salt" />
+                <ScalarProperty Name="passsword" ColumnName="passsword" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="is_manager" ColumnName="is_manager" />
+                <ScalarProperty Name="is_engineer" ColumnName="is_engineer" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="is_operator" ColumnName="is_operator" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vending_machines">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.vending_machines">
+              <MappingFragment StoreEntitySet="vending_machines">
+                <ScalarProperty Name="vending_machine_id" ColumnName="vending_machine_id" />
+                <ScalarProperty Name="serial_number" ColumnName="serial_number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="rfid_cash_collection" ColumnName="rfid_cash_collection" />
+                <ScalarProperty Name="rfid_loading" ColumnName="rfid_loading" />
+                <ScalarProperty Name="kit_online_id" ColumnName="kit_online_id" />
+                <ScalarProperty Name="rfid_service" ColumnName="rfid_service" />
+                <ScalarProperty Name="install_date" ColumnName="install_date" />
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="operator" ColumnName="operator" />
+                <ScalarProperty Name="technician" ColumnName="technician" />
+                <ScalarProperty Name="last_maintenance_date" ColumnName="last_maintenance_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="work_descriptions">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.work_descriptions">
+              <MappingFragment StoreEntitySet="work_descriptions">
+                <ScalarProperty Name="work_description" ColumnName="work_description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="work_modes">
+            <EntityTypeMapping TypeName="UP_MurtazinModel.work_modes">
+              <MappingFragment StoreEntitySet="work_modes">
+                <ScalarProperty Name="work_mode" ColumnName="work_mode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

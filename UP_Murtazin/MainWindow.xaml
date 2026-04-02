@@ -1,0 +1,168 @@
+﻿<Window x:Class="UP_Murtazin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Личный кабинет" Height="800" Width="1500"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F7FA">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая панель (Сайдбар) -->
+        <Border Grid.Column="0" Background="#1d2127" BorderBrush="#E4E7EB" BorderThickness="0,0,1,0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20">
+                    <!-- Лого -->
+                    <Image Source="/Resources/Icons/Logo.png" Width="200" Height="auto"/>
+
+                    <!-- Навигация -->
+                    <TextBlock Text="Навигация" FontSize="12" FontWeight="SemiBold" 
+                               Foreground="#7F8C8D" Margin="0,0,0,12"/>
+
+                    <Button x:Name="BtnMain" Content="Главная" Style="{StaticResource MenuItemStyle}" 
+                            Margin="0,0,0,5" Click="BtnMain_Click"/>
+                    <Button x:Name="BtnMonitor" Content="Монитор ТА" Style="{StaticResource MenuItemStyle}" 
+                            Margin="0,0,0,5" Click="BtnMonitor_Click"/>
+                    <ToggleButton x:Name="BtnDetailedReports" Content="Детальные отчеты" Style="{StaticResource MenuToggleStyle}" 
+                            Margin="0,0,0,5" Click="BtnDetailedReports_Click"/>
+                    <ToggleButton x:Name="BtnInventory" Content="Учет ТМЦ" Style="{StaticResource MenuToggleStyle}" 
+                            Margin="0,0,0,5" Click="BtnInventory_Click"/>
+
+
+                    <!-- Администрирование с расширяемым подменю -->
+                    <ToggleButton x:Name="ToggleAdmin" Content="Администрирование" 
+                                  Style="{StaticResource MenuToggleStyle}" Margin="0,0,0,5"
+                                  Checked="ToggleAdmin_Checked" Unchecked="ToggleAdmin_Unchecked"/>
+
+                    <StackPanel x:Name="AdminSubMenu" Visibility="Collapsed" Margin="20,0,0,10">
+                        <Button x:Name="BtnMachines" Content="Торговые автоматы" Style="{StaticResource SubMenuItemStyle}" 
+                                Margin="0,5" Click="BtnMachines_Click"/>
+                        <Button x:Name="BtnCompanies" Content="Компании" Style="{StaticResource SubMenuItemStyle}" 
+                                Margin="0,5" Click="BtnCompanies_Click"/>
+                        <Button x:Name="BtnUsers" Content="Пользователи" Style="{StaticResource SubMenuItemStyle}" 
+                                Margin="0,5" Click="BtnUsers_Click"/>
+                        <Button x:Name="BtnModems" Content="Модемы" Style="{StaticResource SubMenuItemStyle}" 
+                                Margin="0,5" Click="BtnModems_Click"/>
+                        <Button x:Name="BtnAdditional" Content="Дополнительные" Style="{StaticResource SubMenuItemStyle}" 
+                                Margin="0,5" Click="BtnAdditional_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Правая область -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхняя панель с аккаунтом -->
+            <Border Grid.Row="0" Background="White" BorderBrush="#E4E7EB" BorderThickness="0,0,0,1"
+                    Padding="20,15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Панель управления" FontSize="16" FontWeight="SemiBold" 
+                               Foreground="#2C3E50" VerticalAlignment="Center"/>
+
+                    <!-- Верхняя панель с аккаунтом -->
+                    <Border Grid.Row="0" Background="{StaticResource CardBackgroundBrush}" 
+        BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1"
+        Padding="20,15">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Панель управления" FontSize="16" FontWeight="SemiBold" 
+                   Foreground="{StaticResource PrimaryTextBrush}" VerticalAlignment="Center"/>
+
+                            <!-- DropDown для профиля -->
+                            <Button Grid.Column="1" x:Name="ProfileButton" 
+                Style="{StaticResource ProfileButtonStyle}"
+                Click="ProfileButton_Click">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Width="40" Height="40" CornerRadius="20" Background="#3498DB" Margin="0,0,10,0">
+                                            <Image x:Name="UserAvatar" Width="40" Height="40" Stretch="UniformToFill">
+                                                <Image.Clip>
+                                                    <EllipseGeometry RadiusX="20" RadiusY="20" Center="20,20"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </Border>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock x:Name="UserNameText" Text="Администратор" 
+                                   FontSize="14" FontWeight="Medium" 
+                                   Foreground="{StaticResource PrimaryTextBrush}"/>
+                                            <TextBlock x:Name="UserRoleText" Text="Администратор" 
+                                   FontSize="12" Foreground="{StaticResource SecondaryTextBrush}"/>
+                                        </StackPanel>
+                                        <TextBlock Text="▼" FontSize="12" Foreground="{StaticResource SecondaryTextBrush}"
+                               VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+
+                            <!-- Popup меню профиля -->
+                            <Popup x:Name="ProfilePopup" PlacementTarget="{Binding ElementName=ProfileButton}"
+       Placement="Bottom" StaysOpen="False" Width="280">
+                                <Border Background="{StaticResource CardBackgroundBrush}" 
+            BorderBrush="{StaticResource BorderBrush}" 
+            BorderThickness="1" Padding="0">
+                                    <StackPanel>
+                                        <!-- Информация о пользователе -->
+                                        <StackPanel Margin="15" Orientation="Horizontal">
+                                            <Border Width="40" Height="40" CornerRadius="20" Background="#3498DB" Margin="0,0,10,0">
+                                                <Image x:Name="UserAvatar1" Width="40" Height="40" Stretch="UniformToFill">
+                                                    <Image.Clip>
+                                                        <EllipseGeometry RadiusX="20" RadiusY="20" Center="20,20"/>
+                                                    </Image.Clip>
+                                                </Image>
+                                            </Border>
+                                            <StackPanel VerticalAlignment="Center">
+                                                <TextBlock x:Name="PopupUserNameText" Text="Администратор" 
+                               FontSize="14" FontWeight="Bold"/>
+                                                <TextBlock x:Name="PopupUserRoleText" Text="Администратор" 
+                               FontSize="12" Foreground="{StaticResource SecondaryTextBrush}"/>
+                                                <TextBlock x:Name="PopupUserEmailText" Text="admin@company.ru" 
+                               FontSize="11" Foreground="{StaticResource SecondaryTextBrush}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <Separator Background="{StaticResource BorderBrush}" Margin="0,5"/>
+
+                                        <!-- Пункты меню -->
+                                        <Button Content="👤 Мой профиль" Style="{StaticResource DropdownMenuItemStyle}"
+                    Click="ViewProfile_Click"/>
+                                        <Button Content="⚙️ Настройки" Style="{StaticResource DropdownMenuItemStyle}"
+                    Click="Settings_Click"/>
+                                        <Separator Background="{StaticResource BorderBrush}" Margin="0,5"/>
+                                        <Button Content="🚪 Выход" Style="{StaticResource DropdownMenuItemStyle}"
+                    Click="Logout_Click" Foreground="#F44336"/>
+                                    </StackPanel>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+            <Canvas x:Name="NotificationPanel" Grid.ColumnSpan="2" 
+        HorizontalAlignment="Right" VerticalAlignment="Bottom"
+        Width="380" Height="Auto" Margin="0,0,20,20">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+            </Canvas>
+            <!-- Контент (Frame для страниц) -->
+            <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"
+                   Margin="20" Background="Transparent"/>
+        </Grid>
+    </Grid>
+</Window>
