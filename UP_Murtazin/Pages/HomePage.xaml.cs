@@ -122,7 +122,7 @@ namespace UP_Murtazin.Pages
                 BrokenCount.Text = broken.ToString();
                 TotalMachinesCount.Text = total.ToString();
 
-                // Рисуем разноцветные сектора круга
+                // добавить разноцветность праивльнцб потом
                 DrawNetworkCircleSectors(total, working, maintenance, broken);
             }
             catch (Exception ex)
