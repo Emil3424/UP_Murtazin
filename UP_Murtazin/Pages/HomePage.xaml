@@ -62,7 +62,7 @@
                             </Viewbox>
 
                             <TextBlock Grid.Row="1" x:Name="WorkingMachinesCount" Text="Работающих автоматов: 0 из 0" 
-                                       FontSize="13" Foreground="#7F8C8D" HorizontalAlignment="Center"/>
+                                       FontSize="16" Foreground="#7F8C8D" HorizontalAlignment="Center"/>
                         </Grid>
                     </StackPanel>
                 </Border>
@@ -102,18 +102,18 @@
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" Margin="0,2">
                                     <Rectangle Width="12" Height="12" Fill="#27AE60" Margin="0,0,8,0"/>
-                                    <TextBlock Text="Работает" FontSize="12" Foreground="#2C3E50"/>
-                                    <TextBlock x:Name="WorkingCount" Text="0" FontSize="12" FontWeight="Bold" Margin="8,0,0,0"/>
+                                    <TextBlock Text="Работает" FontSize="16" Foreground="#2C3E50"/>
+                                    <TextBlock x:Name="WorkingCount" Text="0" FontSize="16" FontWeight="Bold" Margin="8,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,2">
                                     <Rectangle Width="12" Height="12" Fill="#F39C12" Margin="0,0,8,0"/>
-                                    <TextBlock Text="Обслуживается" FontSize="12" Foreground="#2C3E50"/>
-                                    <TextBlock x:Name="MaintenanceCount" Text="0" FontSize="12" FontWeight="Bold" Margin="8,0,0,0"/>
+                                    <TextBlock Text="Обслуживается" FontSize="16" Foreground="#2C3E50"/>
+                                    <TextBlock x:Name="MaintenanceCount" Text="0" FontSize="16" FontWeight="Bold" Margin="8,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,2">
                                     <Rectangle Width="12" Height="12" Fill="#E74C3C" Margin="0,0,8,0"/>
-                                    <TextBlock Text="Сломан" FontSize="12" Foreground="#2C3E50"/>
-                                    <TextBlock x:Name="BrokenCount" Text="0" FontSize="12" FontWeight="Bold" Margin="8,0,0,0"/>
+                                    <TextBlock Text="Сломан" FontSize="16" Foreground="#2C3E50"/>
+                                    <TextBlock x:Name="BrokenCount" Text="0" FontSize="16" FontWeight="Bold" Margin="8,0,0,0"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

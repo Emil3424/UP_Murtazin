@@ -18,7 +18,7 @@
                     <Image Source="/Resources/Icons/Logo.png" Width="200" Height="auto"/>
 
                     <!-- Навигация -->
-                    <TextBlock Text="Навигация" FontSize="12" FontWeight="SemiBold" 
+                    <TextBlock Text="Навигация" FontSize="20" FontWeight="SemiBold" 
                                Foreground="#7F8C8D" Margin="0,0,0,12"/>
 
                     <Button x:Name="BtnMain" Content="Главная" Style="{StaticResource MenuItemStyle}" 
@@ -81,7 +81,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Панель управления" FontSize="16" FontWeight="SemiBold" 
+                            <TextBlock Text="Панель управления" FontSize="20" FontWeight="SemiBold" 
                    Foreground="{StaticResource PrimaryTextBrush}" VerticalAlignment="Center"/>
 
                             <!-- DropDown для профиля -->
@@ -99,7 +99,7 @@
                                         </Border>
                                         <StackPanel VerticalAlignment="Center">
                                             <TextBlock x:Name="UserNameText" Text="Администратор" 
-                                   FontSize="14" FontWeight="Medium" 
+                                   FontSize="16" FontWeight="Medium" 
                                    Foreground="{StaticResource PrimaryTextBrush}"/>
                                             <TextBlock x:Name="UserRoleText" Text="Администратор" 
                                    FontSize="12" Foreground="{StaticResource SecondaryTextBrush}"/>
@@ -112,7 +112,7 @@
 
                             <!-- Popup меню профиля -->
                             <Popup x:Name="ProfilePopup" PlacementTarget="{Binding ElementName=ProfileButton}"
-       Placement="Bottom" StaysOpen="False" Width="280">
+       Placement="Bottom" StaysOpen="False" Width="auto">
                                 <Border Background="{StaticResource CardBackgroundBrush}" 
             BorderBrush="{StaticResource BorderBrush}" 
             BorderThickness="1" Padding="0">
