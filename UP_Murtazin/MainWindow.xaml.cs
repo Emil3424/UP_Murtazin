@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -121,23 +122,11 @@ namespace UP_Murtazin
 
             if (result == MessageBoxResult.Yes)
             {
-                // Закрываем главное окно
-                this.Close();
+                // Запускаем новое приложение
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
 
-                // Показываем окно входа снова
-                var loginWindow = new LoginWindow();
-                if (loginWindow.ShowDialog() == true && loginWindow.CurrentUser != null)
-                {
-                    // Если пользователь снова вошел, обновляем данные
-                    _currentUser = loginWindow.CurrentUser;
-                    SetupUIForUser();
-                    MainFrame.Navigate(new HomePage());
-                    this.Show();
-                }
-                else
-                {
-                    Application.Current.Shutdown();
-                }
+                // Закрываем текущее приложение
+                Application.Current.Shutdown();
             }
         }
 

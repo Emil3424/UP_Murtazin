@@ -501,13 +501,11 @@ namespace UP_Murtazin.Okna
                     isNew ? "Автомат успешно создан" : "Данные успешно обновлены",
                     Models.NotificationType.Info);
 
-                DialogResult = true;
-                Close();
 
-                //dbContext.SaveChanges();
-                //MessageBox.Show(isNew ? "Автомат успешно создан" : "Данные успешно обновлены", "Успех",
-                //    MessageBoxButton.OK, MessageBoxImage.Information);
-                //DialogResult = true;
+                dbContext.SaveChanges();
+                MessageBox.Show(isNew ? "Автомат успешно создан" : "Данные успешно обновлены", "Успех",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                DialogResult = true;
                 Close();
             }
             catch (Exception ex)
