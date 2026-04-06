@@ -153,11 +153,7 @@ namespace UP_Murtazin.Pages
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"=== ОШИБКА ЗАГРУЗКИ ДАННЫХ ===");
-                System.Diagnostics.Debug.WriteLine($"Message: {ex.Message}");
-                System.Diagnostics.Debug.WriteLine($"Stack: {ex.StackTrace}");
-
-                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}\n\nПодробнее см. в окне вывода (Output)",
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}",
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -273,28 +269,15 @@ namespace UP_Murtazin.Pages
             }
         }
 
-        private string GetCoinStatus()
-        {
-            string[] statuses = { "✅", "❌", "⚠️" };
-            return statuses[random.Next(0, 3)];
-        }
+        private string GetCoinStatus() => GetRandomHardwareStatus();
+        private string GetBillStatus() => GetRandomHardwareStatus();
+        private string GetCardStatus() => GetRandomHardwareStatus();
+        private string GetDispenserStatus() => GetRandomHardwareStatus();
 
-        private string GetBillStatus()
+        private string GetRandomHardwareStatus()
         {
             string[] statuses = { "✅", "❌", "⚠️" };
-            return statuses[random.Next(0, 3)];
-        }
-
-        private string GetCardStatus()
-        {
-            string[] statuses = { "✅", "❌", "⚠️" };
-            return statuses[random.Next(0, 3)];
-        }
-
-        private string GetDispenserStatus()
-        {
-            string[] statuses = { "✅", "❌", "⚠️" };
-            return statuses[random.Next(0, 3)];
+            return statuses[random.Next(0, statuses.Length)];
         }
 
         private void StatusFilter_Click(object sender, MouseButtonEventArgs e)
