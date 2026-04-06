@@ -1,7 +1,7 @@
 ﻿<Window x:Class="UP_Murtazin.Okna.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Настройки" Height="450" Width="500"
+        Title="Настройки" Height="auto" Width="500"
         WindowStartupLocation="CenterOwner"
         Background="{StaticResource BackgroundBrush}">
 
@@ -18,17 +18,17 @@
                            Margin="0,0,0,15"/>
 
                 <TextBlock Text="Текущий пароль" Foreground="{StaticResource SecondaryTextBrush}"/>
-                <PasswordBox x:Name="CurrentPasswordBox" 
+                <PasswordBox x:Name="CurrentPasswordBox" Height="auto"
                              Style="{StaticResource InputPasswordBoxStyle}" 
                              Margin="0,5,0,15"/>
 
                 <TextBlock Text="Новый пароль" Foreground="{StaticResource SecondaryTextBrush}"/>
-                <PasswordBox x:Name="NewPasswordBox" 
+                <PasswordBox x:Name="NewPasswordBox"  Height="auto"
                              Style="{StaticResource InputPasswordBoxStyle}" 
                              Margin="0,5,0,15"/>
 
                 <TextBlock Text="Подтверждение пароля" Foreground="{StaticResource SecondaryTextBrush}"/>
-                <PasswordBox x:Name="ConfirmPasswordBox" 
+                <PasswordBox x:Name="ConfirmPasswordBox" Height="auto"
                              Style="{StaticResource InputPasswordBoxStyle}" 
                              Margin="0,5,0,20"/>
 

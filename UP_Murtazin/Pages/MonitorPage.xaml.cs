@@ -390,15 +390,40 @@ namespace UP_Murtazin.Pages
         {
             try
             {
-                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-                dlg.FileName = "Монитор_ТА_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                dlg.DefaultExt = ".xlsx";
-                dlg.Filter = "Excel files (.xlsx)|*.xlsx";
+                // Создаем диалог сохранения файла
+                Microsoft.Win32.SaveFileDialog saveDialog = new Microsoft.Win32.SaveFileDialog();
+                saveDialog.FileName = $"Монитор_ТА_{DateTime.Now:yyyyMMdd_HHmmss}";
+                saveDialog.DefaultExt = ".csv";
+                saveDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
 
-                if (dlg.ShowDialog() == true)
+                if (saveDialog.ShowDialog() == true)
                 {
-                    MessageBox.Show("Данные экспортированы в Excel", "Экспорт",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    // Создаем CSV файл
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(saveDialog.FileName, false, System.Text.Encoding.UTF8))
+                    {
+                        // Заголовки
+                        sw.WriteLine("\"#\";\"Торговый автомат\";\"Адрес\";\"Статус\";\"Оператор\";\"Сигнал\";\"Загрузка\";\"Денежные средства\";\"Наличные\";\"Последнее событие\"");
+
+                        // Данные
+                        foreach (var machine in filteredMachines)
+                        {
+                            string line = $"\"{machine.Number}\";" +
+                                          $"\"{EscapeCsvValue(machine.Name)}\";" +
+                                          $"\"{EscapeCsvValue(machine.Address)}\";" +
+                                          $"\"{machine.Status}\";" +
+                                          $"\"{machine.OperatorName}\";" +
+                                          $"\"{machine.SignalStrength}\";" +
+                                          $"\"{machine.LoadPercentage}%\";" +
+                                          $"\"{machine.TotalIncome:N2}\";" +
+                                          $"\"{machine.CashAmount:N2}\";" +
+                                          $"\"{machine.LastEventTime?.ToString("dd.MM HH:mm") ?? "Нет событий"}\"";
+
+                            sw.WriteLine(line);
+                        }
+                    }
+
+                    MessageBox.Show($"Данные успешно экспортированы!\n\nФайл: {saveDialog.FileName}",
+                        "Экспорт завершен", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
@@ -406,6 +431,16 @@ namespace UP_Murtazin.Pages
                 MessageBox.Show($"Ошибка экспорта: {ex.Message}", "Ошибка",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private string EscapeCsvValue(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return "";
+
+            // Экранируем кавычки
+            value = value.Replace("\"", "\"\"");
+            return value;
         }
     }
 }

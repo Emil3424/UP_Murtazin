@@ -66,6 +66,8 @@ namespace UP_Murtazin.Pages
         {
             try
             {
+                percent = Math.Max(0, Math.Min(1, percent)); // защита
+
                 double angle = percent * 180;
                 double radians = angle * Math.PI / 180;
 
@@ -73,14 +75,20 @@ namespace UP_Murtazin.Pages
                 double centerY = 50;
                 double radius = 40;
 
-                double startX = 10;
-                double startY = 50;
-                double endX = centerX + radius * Math.Cos(radians);
-                double endY = centerY - radius * Math.Sin(radians);
+                double startX = centerX - radius;
+                double startY = centerY;
 
-                bool isLargeArc = angle > 180;
+                double endX = centerX + radius * Math.Cos(Math.PI - radians);
+                double endY = centerY - radius * Math.Sin(Math.PI - radians);
 
-                var arcSegment = new ArcSegment
+                bool isLargeArc = percent > 0.5;
+
+                var figure = new PathFigure
+                {
+                    StartPoint = new Point(startX, startY)
+                };
+
+                var arc = new ArcSegment
                 {
                     Point = new Point(endX, endY),
                     Size = new Size(radius, radius),
@@ -88,20 +96,15 @@ namespace UP_Murtazin.Pages
                     IsLargeArc = isLargeArc
                 };
 
-                var pathFigure = new PathFigure
-                {
-                    StartPoint = new Point(startX, startY)
-                };
-                pathFigure.Segments.Add(arcSegment);
+                figure.Segments.Add(arc);
 
-                var pathGeometry = new PathGeometry();
-                pathGeometry.Figures.Add(pathFigure);
+                var geometry = new PathGeometry();
+                geometry.Figures.Add(figure);
 
-                ProgressPath.Data = pathGeometry;
+                ProgressPath.Data = geometry;
             }
-            catch (Exception ex)
+            catch
             {
-                // Игнорируем ошибки отрисовки
             }
         }
 
