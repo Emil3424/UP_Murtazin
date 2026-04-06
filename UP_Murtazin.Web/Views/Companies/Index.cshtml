@@ -1,0 +1,22 @@
+@model List<UP_Murtazin.Web.Models.CompanyViewModel>
+@{
+    ViewData["Title"] = "Companies";
+}
+
+<h2>Companies</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Company</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Company</td>
+        </tr>
+    }
+    </tbody>
+</table>

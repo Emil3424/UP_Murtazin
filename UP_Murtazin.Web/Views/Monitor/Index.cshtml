@@ -1,0 +1,72 @@
+@model UP_Murtazin.Web.Models.MonitorViewModel
+@{
+    ViewData["Title"] = "Monitor";
+}
+
+<h2>Монитор торговых автоматов</h2>
+
+<form method="get" class="row g-3 mb-3">
+    <div class="col-md-3">
+        <label class="form-label">Поиск</label>
+        <input class="form-control" name="search" value="@Model.Search" placeholder="Название, модель, адрес" />
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Сортировка</label>
+        <select class="form-select" name="sortBy">
+            <option value="number" selected="@(Model.SortBy=="number")">По номеру</option>
+            <option value="status" selected="@(Model.SortBy=="status")">По состоянию ТА</option>
+            <option value="name" selected="@(Model.SortBy=="name")">По названию</option>
+            <option value="money" selected="@(Model.SortBy=="money")">По сумме денег</option>
+            <option value="load" selected="@(Model.SortBy=="load")">По загрузке</option>
+        </select>
+    </div>
+    <div class="col-md-6 d-flex align-items-end gap-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="statusWorking" value="true" checked="@Model.StatusWorking" />
+            <label class="form-check-label">Работает</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="statusBroken" value="true" checked="@Model.StatusBroken" />
+            <label class="form-check-label">Сломан</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="statusMaintenance" value="true" checked="@Model.StatusMaintenance" />
+            <label class="form-check-label">Обслуживается</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Применить</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Очистить</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Торговый автомат</th>
+            <th>Связь</th>
+            <th>Статус</th>
+            <th>Загрузка</th>
+            <th>Денежные средства</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Machines)
+    {
+        <tr>
+            <td>@item.Number</td>
+            <td><strong>@item.Name</strong><br /><small>@item.Model | @item.Address</small></td>
+            <td>@item.OperatorName</td>
+            <td>@item.Status</td>
+            <td>@item.LoadPercentage%</td>
+            <td>@item.TotalIncome.ToString("N2") р.</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<p class="text-muted">
+    Итого автоматов: @Model.Machines.Count,
+    Работает: @Model.Machines.Count(x => x.Status == "Работает"),
+    Сломан: @Model.Machines.Count(x => x.Status == "Сломан"),
+    Обслуживается: @Model.Machines.Count(x => x.Status == "Обслуживается")
+</p>

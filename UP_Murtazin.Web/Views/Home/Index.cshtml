@@ -1,0 +1,44 @@
+﻿@model UP_Murtazin.Web.Models.HomeDashboardViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h2>Личный кабинет. Главная</h2>
+<p class="text-muted">Данные актуальны на: @Model.LastUpdate.ToString("dd.MM.yyyy HH:mm")</p>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3"><div class="card p-3"><div>Всего автоматов</div><strong>@Model.TotalMachines</strong></div></div>
+    <div class="col-md-3"><div class="card p-3"><div>Работает</div><strong class="text-success">@Model.WorkingMachines</strong></div></div>
+    <div class="col-md-3"><div class="card p-3"><div>Обслуживается</div><strong class="text-primary">@Model.MaintenanceMachines</strong></div></div>
+    <div class="col-md-3"><div class="card p-3"><div>Сломан</div><strong class="text-danger">@Model.BrokenMachines</strong></div></div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4"><div class="card p-3"><div>Денег в ТА</div><strong>@Model.MoneyInMachines.ToString("N0") р.</strong></div></div>
+    <div class="col-md-4"><div class="card p-3"><div>Сдача в ТА</div><strong>@Model.ChangeInMachines.ToString("N0") р.</strong></div></div>
+    <div class="col-md-4"><div class="card p-3"><div>Обслужено ТА, сег./вчера</div><strong>@Model.ServicedToday / @Model.ServicedYesterday</strong></div></div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6"><div class="card p-3"><div>Выручка сегодня</div><strong>@Model.RevenueToday.ToString("N0") р.</strong></div></div>
+    <div class="col-md-6"><div class="card p-3"><div>Выручка вчера</div><strong>@Model.RevenueYesterday.ToString("N0") р.</strong></div></div>
+</div>
+
+<h4>Динамика продаж (последние 10 дней)</h4>
+<table class="table table-sm table-striped">
+    <thead><tr><th>Дата</th><th>Сумма</th><th>Количество</th></tr></thead>
+    <tbody>
+    @foreach (var row in Model.Last10DaysSales)
+    {
+        <tr><td>@row.Date.ToString("dd.MM.yyyy")</td><td>@row.TotalSum.ToString("N2")</td><td>@row.TotalQuantity.ToString("N2")</td></tr>
+    }
+    </tbody>
+</table>
+
+<h4>Новости</h4>
+<ul class="list-group">
+@foreach (var news in Model.News)
+{
+    <li class="list-group-item"><strong>@news.Date</strong> - @news.Title</li>
+}
+</ul>
