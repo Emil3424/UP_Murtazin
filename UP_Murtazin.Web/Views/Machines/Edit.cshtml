@@ -1,0 +1,56 @@
+@model UP_Murtazin.Web.Models.MachineViewModel
+@{
+    ViewData["Title"] = Model.VendingMachineId is null ? "Create machine" : "Edit machine";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit" method="post" class="row g-3">
+    @Html.AntiForgeryToken()
+    <input asp-for="VendingMachineId" type="hidden" />
+    <div class="col-md-4">
+        <label asp-for="SerialNumber" class="form-label"></label>
+        <input asp-for="SerialNumber" class="form-control" />
+    </div>
+    <div class="col-md-8">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Place" class="form-label"></label>
+        <input asp-for="Place" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="InstallDate" class="form-label"></label>
+        <input asp-for="InstallDate" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="UserId" class="form-label"></label>
+        <input asp-for="UserId" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Technician" class="form-label"></label>
+        <input asp-for="Technician" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="RfidCashCollection" class="form-label"></label>
+        <input asp-for="RfidCashCollection" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="RfidLoading" class="form-label"></label>
+        <input asp-for="RfidLoading" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="RfidService" class="form-label"></label>
+        <input asp-for="RfidService" class="form-control" />
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

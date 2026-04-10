@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using UP_Murtazin.Helpers;
 using UP_Murtazin.Models;
 using UP_Murtazin.Okna;
@@ -41,8 +41,8 @@ namespace UP_Murtazin
 
             if (!string.IsNullOrEmpty(_currentUser.ImageBase64))
             {
-                UserAvatar.Source = ConvertBase64ToImage(_currentUser.ImageBase64);
-                UserAvatar1.Source = ConvertBase64ToImage(_currentUser.ImageBase64);
+                UserAvatar.Source = ImageHelper.ConvertBase64ToImage(_currentUser.ImageBase64);
+                UserAvatar1.Source = ImageHelper.ConvertBase64ToImage(_currentUser.ImageBase64);
             }
             else
             {
@@ -57,36 +57,6 @@ namespace UP_Murtazin
                 ToggleAdmin.Visibility = Visibility.Collapsed;
                 BtnDetailedReports.Visibility = Visibility.Collapsed;
                 BtnInventory.Visibility = Visibility.Collapsed;
-            }
-        }
-        private BitmapImage ConvertBase64ToImage(string base64String)
-        {
-            try
-            {
-                // Убираем префикс "data:image/png;base64," если он есть
-                string base64Data = base64String;
-                if (base64String.Contains(","))
-                {
-                    base64Data = base64String.Substring(base64String.IndexOf(",") + 1);
-                }
-
-                byte[] imageBytes = Convert.FromBase64String(base64Data);
-
-                using (var stream = new MemoryStream(imageBytes))
-                {
-                    var bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.StreamSource = stream;
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.EndInit();
-                    bitmap.Freeze();
-                    return bitmap;
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Ошибка конвертации изображения: {ex.Message}");
-                return null;
             }
         }
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
@@ -121,23 +91,11 @@ namespace UP_Murtazin
 
             if (result == MessageBoxResult.Yes)
             {
-                // Закрываем главное окно
-                this.Close();
+                // Запускаем новое приложение
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
 
-                // Показываем окно входа снова
-                var loginWindow = new LoginWindow();
-                if (loginWindow.ShowDialog() == true && loginWindow.CurrentUser != null)
-                {
-                    // Если пользователь снова вошел, обновляем данные
-                    _currentUser = loginWindow.CurrentUser;
-                    SetupUIForUser();
-                    MainFrame.Navigate(new HomePage());
-                    this.Show();
-                }
-                else
-                {
-                    Application.Current.Shutdown();
-                }
+                // Закрываем текущее приложение
+                Application.Current.Shutdown();
             }
         }
 

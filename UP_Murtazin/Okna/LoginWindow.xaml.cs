@@ -115,49 +115,29 @@ namespace UP_Murtazin.Okna
 
                 if (user == null)
                 {
-                    Console.WriteLine($"[ОШИБКА ВХОДА] Пользователь с email '{email}' не найден");
                     ShowError("Пользователь с таким email не найден");
                     return;
                 }
 
-                Console.WriteLine($"[ВХОД] Найден пользователь: {user.full_name} ({user.email})");
-
                 // Проверка пароля
                 bool isPasswordValid = false;
-
-                // Хэшируем введенный пароль
-                string hashedInputPassword = PasswordHasher.HashPassword(password);
-                Console.WriteLine($"[ВХОД] Хэш введенного пароля: {hashedInputPassword}");
 
                 // Если пароль не установлен, устанавливаем его
                 if (string.IsNullOrEmpty(user.passsword))
                 {
-                    Console.WriteLine("[ВХОД] У пользователя нет сохраненного хэша пароля");
-
                     // Устанавливаем пароль "123" для пользователя
                     string defaultPassword = "123";
                     user.passsword = PasswordHasher.HashPassword(defaultPassword);
                     dbContext.SaveChanges();
-                    Console.WriteLine($"[ВХОД] Установлен хэш для пароля '{defaultPassword}': {user.passsword}");
+                }
 
-                    // Проверяем введенный пароль
-                    isPasswordValid = PasswordHasher.VerifyPassword(password, user.passsword);
-                    Console.WriteLine($"[ВХОД] Проверка пароля: {(isPasswordValid ? "УСПЕШНО" : "НЕУДАЧНО")}");
-                }
-                else
-                {
-                    Console.WriteLine($"[ВХОД] Сохраненный хэш пользователя: {user.passsword}");
-                    isPasswordValid = PasswordHasher.VerifyPassword(password, user.passsword);
-                    Console.WriteLine($"[ВХОД] Результат проверки пароля: {(isPasswordValid ? "УСПЕШНО" : "НЕУДАЧНО")}");
-                }
+                isPasswordValid = PasswordHasher.VerifyPassword(password, user.passsword);
 
                 if (!isPasswordValid)
                 {
                     ShowError("Неверный пароль");
                     return;
                 }
-
-                Console.WriteLine($"[ВХОД] Пользователь {user.full_name} успешно авторизован");
 
                 // Создаем сессию пользователя
                 CurrentUser = new UserSession
@@ -180,8 +160,6 @@ namespace UP_Murtazin.Okna
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[ОШИБКА ВХОДА] Исключение: {ex.Message}");
-                Console.WriteLine($"[ОШИБКА ВХОДА] StackTrace: {ex.StackTrace}");
                 ShowError($"Ошибка входа: {ex.Message}");
                 LoginButton.IsEnabled = true;
             }

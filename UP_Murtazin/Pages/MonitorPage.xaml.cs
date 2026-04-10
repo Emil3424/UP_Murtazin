@@ -153,11 +153,7 @@ namespace UP_Murtazin.Pages
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"=== ОШИБКА ЗАГРУЗКИ ДАННЫХ ===");
-                System.Diagnostics.Debug.WriteLine($"Message: {ex.Message}");
-                System.Diagnostics.Debug.WriteLine($"Stack: {ex.StackTrace}");
-
-                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}\n\nПодробнее см. в окне вывода (Output)",
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}",
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -273,28 +269,15 @@ namespace UP_Murtazin.Pages
             }
         }
 
-        private string GetCoinStatus()
-        {
-            string[] statuses = { "✅", "❌", "⚠️" };
-            return statuses[random.Next(0, 3)];
-        }
+        private string GetCoinStatus() => GetRandomHardwareStatus();
+        private string GetBillStatus() => GetRandomHardwareStatus();
+        private string GetCardStatus() => GetRandomHardwareStatus();
+        private string GetDispenserStatus() => GetRandomHardwareStatus();
 
-        private string GetBillStatus()
+        private string GetRandomHardwareStatus()
         {
             string[] statuses = { "✅", "❌", "⚠️" };
-            return statuses[random.Next(0, 3)];
-        }
-
-        private string GetCardStatus()
-        {
-            string[] statuses = { "✅", "❌", "⚠️" };
-            return statuses[random.Next(0, 3)];
-        }
-
-        private string GetDispenserStatus()
-        {
-            string[] statuses = { "✅", "❌", "⚠️" };
-            return statuses[random.Next(0, 3)];
+            return statuses[random.Next(0, statuses.Length)];
         }
 
         private void StatusFilter_Click(object sender, MouseButtonEventArgs e)
@@ -407,15 +390,40 @@ namespace UP_Murtazin.Pages
         {
             try
             {
-                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-                dlg.FileName = "Монитор_ТА_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                dlg.DefaultExt = ".xlsx";
-                dlg.Filter = "Excel files (.xlsx)|*.xlsx";
+                // Создаем диалог сохранения файла
+                Microsoft.Win32.SaveFileDialog saveDialog = new Microsoft.Win32.SaveFileDialog();
+                saveDialog.FileName = $"Монитор_ТА_{DateTime.Now:yyyyMMdd_HHmmss}";
+                saveDialog.DefaultExt = ".csv";
+                saveDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
 
-                if (dlg.ShowDialog() == true)
+                if (saveDialog.ShowDialog() == true)
                 {
-                    MessageBox.Show("Данные экспортированы в Excel", "Экспорт",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    // Создаем CSV файл
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(saveDialog.FileName, false, System.Text.Encoding.UTF8))
+                    {
+                        // Заголовки
+                        sw.WriteLine("\"#\";\"Торговый автомат\";\"Адрес\";\"Статус\";\"Оператор\";\"Сигнал\";\"Загрузка\";\"Денежные средства\";\"Наличные\";\"Последнее событие\"");
+
+                        // Данные
+                        foreach (var machine in filteredMachines)
+                        {
+                            string line = $"\"{machine.Number}\";" +
+                                          $"\"{EscapeCsvValue(machine.Name)}\";" +
+                                          $"\"{EscapeCsvValue(machine.Address)}\";" +
+                                          $"\"{machine.Status}\";" +
+                                          $"\"{machine.OperatorName}\";" +
+                                          $"\"{machine.SignalStrength}\";" +
+                                          $"\"{machine.LoadPercentage}%\";" +
+                                          $"\"{machine.TotalIncome:N2}\";" +
+                                          $"\"{machine.CashAmount:N2}\";" +
+                                          $"\"{machine.LastEventTime?.ToString("dd.MM HH:mm") ?? "Нет событий"}\"";
+
+                            sw.WriteLine(line);
+                        }
+                    }
+
+                    MessageBox.Show($"Данные успешно экспортированы!\n\nФайл: {saveDialog.FileName}",
+                        "Экспорт завершен", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
@@ -423,6 +431,16 @@ namespace UP_Murtazin.Pages
                 MessageBox.Show($"Ошибка экспорта: {ex.Message}", "Ошибка",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private string EscapeCsvValue(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return "";
+
+            // Экранируем кавычки
+            value = value.Replace("\"", "\"\"");
+            return value;
         }
     }
 }

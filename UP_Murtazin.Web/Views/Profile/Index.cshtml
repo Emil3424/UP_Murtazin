@@ -1,0 +1,30 @@
+@model UP_Murtazin.Web.Models.ProfileViewModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h2>Мой профиль</h2>
+
+<div class="card p-4" style="max-width: 700px;">
+    <div class="row">
+        <div class="col-md-3">
+            @if (!string.IsNullOrWhiteSpace(Model.ImageBase64))
+            {
+                <img class="img-fluid rounded-circle" alt="avatar" src="@Model.ImageBase64" />
+            }
+            else
+            {
+                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width:120px;height:120px;">
+                    @Model.FullName.Take(1).FirstOrDefault()
+                </div>
+            }
+        </div>
+        <div class="col-md-9">
+            <p><strong>ФИО:</strong> @Model.FullName</p>
+            <p><strong>Email:</strong> @Model.Email</p>
+            <p><strong>Роль:</strong> @Model.Role</p>
+            <p><strong>Телефон:</strong> @Model.Phone</p>
+            <p><strong>Должность:</strong> @Model.Role</p>
+        </div>
+    </div>
+</div>

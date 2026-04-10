@@ -1,0 +1,40 @@
+@model List<UP_Murtazin.Web.Models.MachineViewModel>
+@{
+    ViewData["Title"] = "Machines";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Machines</h2>
+    <a asp-action="Create" class="btn btn-primary">Add machine</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Serial</th>
+            <th>Name</th>
+            <th>Place</th>
+            <th>Install Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.SerialNumber</td>
+            <td>@item.Name</td>
+            <td>@item.Place</td>
+            <td>@item.InstallDate</td>
+            <td class="d-flex gap-2">
+                <a asp-action="Edit" asp-route-id="@item.VendingMachineId" class="btn btn-sm btn-outline-primary">Edit</a>
+                <form asp-action="Delete" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@item.VendingMachineId" />
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

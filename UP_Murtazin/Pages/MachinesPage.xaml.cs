@@ -312,14 +312,7 @@ namespace UP_Murtazin.Pages
             var border = sender as Border;
             if (border?.Tag != null && !isDragging)
             {
-                int id = (int)border.Tag;
-                var machine = dbContext.vending_machines.FirstOrDefault(vm => vm.serial_number == id);
-                if (machine != null)
-                {
-                    var editWindow = new EditMachineWindow(dbContext, machine);
-                    editWindow.ShowDialog();
-                    LoadData();
-                }
+                OpenEditMachineWindow((int)border.Tag);
                 e.Handled = true;
             }
         }
@@ -435,20 +428,7 @@ namespace UP_Murtazin.Pages
             var button = sender as Button;
             if (button?.Tag != null)
             {
-                int id = (int)button.Tag;
-                var machine = allMachines.FirstOrDefault(m => m.Id == id);
-                if (machine != null && !machine.IsBlocked)
-                {
-                    machine.IsBlocked = true;
-
-                    // Показываем уведомление
-                    Helpers.NotificationManager.Instance.ShowNotification(
-                        "Блокировка",
-                        $"Автомат {machine.Name} (ID: {id}) заблокирован",
-                        Models.NotificationType.Warning);
-
-                    UpdateDisplay();
-                }
+                SetMachineBlockedState((int)button.Tag, true, true);
             }
         }
 
@@ -457,20 +437,7 @@ namespace UP_Murtazin.Pages
             var button = sender as Button;
             if (button?.Tag != null)
             {
-                int id = (int)button.Tag;
-                var machine = allMachines.FirstOrDefault(m => m.Id == id);
-                if (machine != null && machine.IsBlocked)
-                {
-                    machine.IsBlocked = false;
-
-                    // Показываем уведомление
-                    Helpers.NotificationManager.Instance.ShowNotification(
-                        "Разблокировка",
-                        $"Автомат {machine.Name} (ID: {id}) разблокирован",
-                        Models.NotificationType.Info);
-
-                    UpdateDisplay();
-                }
+                SetMachineBlockedState((int)button.Tag, false, true);
             }
         }
 
@@ -479,14 +446,7 @@ namespace UP_Murtazin.Pages
             var button = sender as Button;
             if (button?.Tag != null)
             {
-                int id = (int)button.Tag;
-                var machine = dbContext.vending_machines.FirstOrDefault(vm => vm.serial_number == id);
-                if (machine != null)
-                {
-                    var editWindow = new EditMachineWindow(dbContext, machine);
-                    editWindow.ShowDialog();
-                    LoadData();
-                }
+                OpenEditMachineWindow((int)button.Tag);
             }
         }
 
@@ -573,14 +533,7 @@ namespace UP_Murtazin.Pages
             var menuItem = sender as MenuItem;
             if (menuItem?.Tag != null)
             {
-                int id = (int)menuItem.Tag;
-                var machine = dbContext.vending_machines.FirstOrDefault(vm => vm.serial_number == id);
-                if (machine != null)
-                {
-                    var editWindow = new EditMachineWindow(dbContext, machine);
-                    editWindow.ShowDialog();
-                    LoadData();
-                }
+                OpenEditMachineWindow((int)menuItem.Tag);
             }
         }
 
@@ -589,13 +542,7 @@ namespace UP_Murtazin.Pages
             var menuItem = sender as MenuItem;
             if (menuItem?.Tag != null)
             {
-                int id = (int)menuItem.Tag;
-                var machine = allMachines.FirstOrDefault(m => m.Id == id);
-                if (machine != null && !machine.IsBlocked)
-                {
-                    machine.IsBlocked = true;
-                    UpdateDisplay();
-                }
+                SetMachineBlockedState((int)menuItem.Tag, true, false);
             }
         }
 
@@ -604,13 +551,7 @@ namespace UP_Murtazin.Pages
             var menuItem = sender as MenuItem;
             if (menuItem?.Tag != null)
             {
-                int id = (int)menuItem.Tag;
-                var machine = allMachines.FirstOrDefault(m => m.Id == id);
-                if (machine != null && machine.IsBlocked)
-                {
-                    machine.IsBlocked = false;
-                    UpdateDisplay();
-                }
+                SetMachineBlockedState((int)menuItem.Tag, false, false);
             }
         }
 
@@ -896,7 +837,6 @@ namespace UP_Murtazin.Pages
         }
 
         // Генерация HTML для печати (PDF)
-        // Генерация HTML для печати (PDF)
         private string GenerateHtmlForPrint(DataTable dt)
         {
             System.Text.StringBuilder html = new System.Text.StringBuilder();
@@ -1017,6 +957,36 @@ namespace UP_Murtazin.Pages
                 MessageBox.Show($"Ошибка сброса позиций: {ex.Message}", "Ошибка",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void OpenEditMachineWindow(int id)
+        {
+            var machine = dbContext.vending_machines.FirstOrDefault(vm => vm.serial_number == id);
+            if (machine == null) return;
+
+            var editWindow = new EditMachineWindow(dbContext, machine);
+            editWindow.ShowDialog();
+            LoadData();
+        }
+
+        private void SetMachineBlockedState(int id, bool isBlocked, bool showNotification)
+        {
+            var machine = allMachines.FirstOrDefault(m => m.Id == id);
+            if (machine == null || machine.IsBlocked == isBlocked) return;
+
+            machine.IsBlocked = isBlocked;
+
+            if (showNotification)
+            {
+                Helpers.NotificationManager.Instance.ShowNotification(
+                    isBlocked ? "Блокировка" : "Разблокировка",
+                    isBlocked
+                        ? $"Автомат {machine.Name} (ID: {id}) заблокирован"
+                        : $"Автомат {machine.Name} (ID: {id}) разблокирован",
+                    isBlocked ? Models.NotificationType.Warning : Models.NotificationType.Info);
+            }
+
+            UpdateDisplay();
         }
     }
 
